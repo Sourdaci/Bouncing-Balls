@@ -97,8 +97,8 @@ public class BoxBall
             ySpeed = -ySpeed;
         }
         // check if it has hit the left
-        if(xPosition <= leftPosition){
-            xPosition = (int) (leftPosition);
+        if(xPosition <= leftPosition + 1){
+            xPosition = (int) (leftPosition + 1);
             xSpeed = -xSpeed;
         }
         // check if it has hit the right
