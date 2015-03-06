@@ -102,8 +102,8 @@ public class BallDemo
         }
         
         for (int i=0; i < balls.length; i++){
-            posX = ((aleatorio.nextInt(200)) + 10);
-            posY = ((aleatorio.nextInt(170)) + 10);
+            posX = ((aleatorio.nextInt(200)) + roof);
+            posY = ((aleatorio.nextInt(170)) + left);
             diametro = ((aleatorio.nextInt(40)) + 30);
             redColor = aleatorio.nextInt(256);
             greenColor = aleatorio.nextInt(256);
