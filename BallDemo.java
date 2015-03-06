@@ -82,6 +82,8 @@ public class BallDemo
     {
         int roof = 100; // position of the roof line
         int ground = 400;   // position of the ground line
+        int left = 50;
+        int right = 550;
         int redColor, greenColor, blueColor;
         int posX, posY, diametro;
         Random aleatorio = new Random();
@@ -89,7 +91,7 @@ public class BallDemo
         myCanvas.setVisible(true);
 
         // draw the ground
-        myCanvas.drawBox(50, ground, 550, ground, 50, roof, 550, roof);
+        myCanvas.drawBox(left, ground, right, ground, left, roof, right, roof);
 
         // crate and show the balls
         BoxBall[] balls;
@@ -106,7 +108,7 @@ public class BallDemo
             redColor = aleatorio.nextInt(256);
             greenColor = aleatorio.nextInt(256);
             blueColor = aleatorio.nextInt(256);
-            balls[i] = new BoxBall(posX, posY, diametro, new Color(redColor, greenColor, blueColor), roof, ground, myCanvas);
+            balls[i] = new BoxBall(posX, posY, diametro, new Color(redColor, greenColor, blueColor), roof, ground, left, right, myCanvas);
             balls[i].draw();
         }
 

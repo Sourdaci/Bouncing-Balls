@@ -26,8 +26,11 @@ public class BoxBall
     private int yPosition;
     private final int roofPosition;         // y position of roof
     private final int groundPosition;      // y position of ground
+    private final int leftPosition;
+    private final int rightPosition;
     private Canvas canvas;
     private int ySpeed = 1;                // initial downward speed
+    private int xSpeed = 1;
 
     /**
      * Constructor for objects of class BouncingBall
@@ -40,7 +43,7 @@ public class BoxBall
      * @param drawingCanvas  the canvas to draw this ball on
      */
     public BoxBall(int xPos, int yPos, int diametroBox, Color ballColor, int roofPos, 
-                    int groundPos, Canvas drawingCanvas)
+                    int groundPos, int leftPos, int rightPos, Canvas drawingCanvas)
     {
         xPosition = xPos;
         yPosition = yPos + roofPos;
@@ -48,6 +51,8 @@ public class BoxBall
         diametro = diametroBox;
         roofPosition = roofPos;
         groundPosition = groundPos;
+        leftPosition = leftPos;
+        rightPosition = rightPos;
         canvas = drawingCanvas;
     }
 
@@ -79,7 +84,7 @@ public class BoxBall
         // compute new position
         ySpeed += GRAVITY;
         yPosition += ySpeed;
-        xPosition +=1;
+        xPosition += xSpeed;
         
         // check if it has hit the ground
         if(yPosition >= (groundPosition - diametro)) {
@@ -90,6 +95,16 @@ public class BoxBall
         if(yPosition <= (roofPosition)) {
             yPosition = (int)(roofPosition);
             ySpeed = -ySpeed;
+        }
+        // check if it has hit the left
+        if(xPosition <= leftPosition){
+            xPosition = (int) (leftPosition);
+            xSpeed = -xSpeed;
+        }
+        // check if it has hit the right
+        if(xPosition >= (rightPosition - diametro)){
+            xPosition = (int) (rightPosition - diametro);
+            xSpeed = -xSpeed;
         }
 
         // draw again at new position
