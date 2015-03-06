@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.util.Random;
 
 /**
  * Class BallDemo - a short demonstration showing animation with the 
@@ -21,32 +22,52 @@ public class BallDemo
     }
 
     /**
-     * Simulate two bouncing balls
+     * Simula bolas rebotando.
+     * La cantidad minima es 1.
+     * 
+     * @param bolas Cantidad de bolas que se veran rebotar
      */
-    public void bounce()
+    public void bounce(int bolas)
     {
         int ground = 400;   // position of the ground line
-
+        int redColor, greenColor, blueColor;
+        int posX, posY, diametro;
+        Random aleatorio = new Random();
+        
         myCanvas.setVisible(true);
 
         // draw the ground
         myCanvas.drawLine(50, ground, 550, ground);
 
         // crate and show the balls
-        BouncingBall ball = new BouncingBall(50, 50, 16, Color.BLUE, ground, myCanvas);
-        ball.draw();
-        BouncingBall ball2 = new BouncingBall(70, 80, 20, Color.RED, ground, myCanvas);
-        ball2.draw();
+        BouncingBall[] balls;
+        if(bolas < 1){
+            balls = new BouncingBall[1];
+        }else{
+            balls = new BouncingBall[bolas];
+        }
+        
+        for (int i=0; i < balls.length; i++){
+            posX = ((aleatorio.nextInt(200)) + 10);
+            posY = ((aleatorio.nextInt(170)) + 10);
+            diametro = ((aleatorio.nextInt(40)) + 30);
+            redColor = aleatorio.nextInt(256);
+            greenColor = aleatorio.nextInt(256);
+            blueColor = aleatorio.nextInt(256);
+            balls[i] = new BouncingBall(posX, posY, diametro, new Color(redColor, greenColor, blueColor), ground, myCanvas);
+            balls[i].draw();
+        }
 
         // make them bounce
         boolean finished =  false;
         while(!finished) {
             myCanvas.wait(50);           // small delay
-            ball.move();
-            ball2.move();
-            // stop once ball has travelled a certain distance on x axis
-            if(ball.getXPosition() >= 550 || ball2.getXPosition() >= 550) {
-                finished = true;
+            for (int indice = 0; indice < balls.length; indice++){
+                balls[indice].move();
+                // stop once ball has travelled a certain distance on x axis
+                if(balls[indice].getXPosition() >= 550) {
+                    finished = true;
+                }
             }
         }
     }
