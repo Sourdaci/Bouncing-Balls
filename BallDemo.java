@@ -71,4 +71,56 @@ public class BallDemo
             }
         }
     }
+    
+    /**
+     * Simula cajas rebotando.
+     * La cantidad minima es 1.
+     * 
+     * @param cajas Cantidad de cajas que se veran rebotar
+     */
+    public void boxBounce(int cajas)
+    {
+        int roof = 100; // position of the roof line
+        int ground = 400;   // position of the ground line
+        int redColor, greenColor, blueColor;
+        int posX, posY, diametro;
+        Random aleatorio = new Random();
+        
+        myCanvas.setVisible(true);
+
+        // draw the ground
+        myCanvas.drawBox(50, ground, 550, ground, 50, roof, 550, roof);
+
+        // crate and show the balls
+        BoxBall[] balls;
+        if(cajas < 1){
+            balls = new BoxBall[1];
+        }else{
+            balls = new BoxBall[cajas];
+        }
+        
+        for (int i=0; i < balls.length; i++){
+            posX = ((aleatorio.nextInt(200)) + 10);
+            posY = ((aleatorio.nextInt(170)) + 10);
+            diametro = ((aleatorio.nextInt(40)) + 30);
+            redColor = aleatorio.nextInt(256);
+            greenColor = aleatorio.nextInt(256);
+            blueColor = aleatorio.nextInt(256);
+            balls[i] = new BoxBall(posX, posY, diametro, new Color(redColor, greenColor, blueColor), roof, ground, myCanvas);
+            balls[i].draw();
+        }
+
+        // make them bounce
+        boolean finished =  false;
+        while(!finished) {
+            myCanvas.wait(50);           // small delay
+            for (int indice = 0; indice < balls.length; indice++){
+                balls[indice].move();
+                // stop once ball has travelled a certain distance on x axis
+                if(balls[indice].getXPosition() >= 550) {
+                    finished = true;
+                }
+            }
+        }
+    }
 }

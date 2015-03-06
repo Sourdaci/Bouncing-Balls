@@ -249,6 +249,27 @@ public class Canvas
         graphic.drawLine(x1, y1, x2, y2);   
         canvas.repaint();
     }
+    
+    /**
+     * Draws a box on the Canvas.
+     * 
+     * Top line: x3, y3, x4, y4
+     * Bottom line: x1, y1, x2, y2
+     * Left line: x3, y3, x1, y1
+     * Right line: x4, y4, x2, y2
+     * @param  x1   x co-ordinate of start of line 
+     * @param  y1   y co-ordinate of start of line 
+     * @param  x2   x co-ordinate of end of line 
+     * @param  y2   y co-ordinate of end of line 
+     */
+    public void drawBox(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
+    {
+        graphic.drawLine(x3, y3, x4, y4);
+        graphic.drawLine(x1, y1, x2, y2);
+        graphic.drawLine(x3, y3, x1, y1);
+        graphic.drawLine(x4, y4, x2, y2);
+        canvas.repaint();
+    }
 
     /**
      * Sets the foreground color of the Canvas.
